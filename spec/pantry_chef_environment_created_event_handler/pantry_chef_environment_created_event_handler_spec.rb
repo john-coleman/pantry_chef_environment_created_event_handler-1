@@ -8,6 +8,7 @@ describe Wonga::Daemon::PantryChefEnvironmentCreatedEventHandler do
   let(:message) {
     {
       "user_id" => 1,
+      "environment_id" => 2,
       "team_id" => 42,
       "chef_environment" => "some value"
     }
@@ -15,14 +16,8 @@ describe Wonga::Daemon::PantryChefEnvironmentCreatedEventHandler do
   it_behaves_like "handler"
 
   it "updates Pantry using PantryApiClient" do
-    expect(api_client).to receive(:send_post_request).with(
-      "/api/teams/42/chef_environments",
-      {
-        "user_id" => 1,
-        "team_id" => 42,
-        "chef_environment" => "some value",
-        :name => "some value"
-      }
+    expect(api_client).to receive(:send_put_request).with(
+      "/api/teams/42/chef_environments/2", message
     )
     subject.handle_message(message)
   end
