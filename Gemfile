@@ -10,8 +10,8 @@ end
 group :test, :development do
   gem 'simplecov', require: false
   gem 'simplecov-rcov', require: false
-  gem 'rspec-fire'
   gem 'rspec'
-  gem 'pry-debugger'
+  gem 'rubocop'
+  gem 'pry'
   gem 'rake'
 end
